@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         id: 'IndStreamPlayer',
         tr: false
     };
-    const AwsIndStreamDomain = 'https://varu306lit.com';
+    const AwsIndStreamDomain = 'https://akaino330lpx.com';
 
     (function () {
         const AwsIndStreamPlayerIframe = document.createElement('iframe');
