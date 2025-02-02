@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const IndStreamPlayerConfigs = {
+const IndStreamPlayerConfigs = {
       width: 380,
       height: 280,
       id: 'IndStreamPlayer',
