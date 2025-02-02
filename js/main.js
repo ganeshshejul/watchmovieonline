@@ -1,36 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
     const IndStreamPlayerConfigs = {
-        width: 380,
-        height: 280,
-        id: 'IndStreamPlayer',
-        tr: false
+      width: 380,
+      height: 280,
+      id: 'IndStreamPlayer',
+      tr: false
     };
-    const AwsIndStreamDomain = 'https://akaino330lpx.com';
 
-    (function () {
-        const AwsIndStreamPlayerIframe = document.createElement('iframe');
-        let initIndStreamPlayer = false;
+    const AwsIndStreamDomain = 'https://akaino330lpx.com'; // Ensure this domain is correct
 
-        const genAwsPlayer = (imdbID) => {
-            const AwsIndStreamIframeParamTr = IndStreamPlayerConfigs.tr !== false && IndStreamPlayerConfigs.tr > 0 ? `?tr=${parseInt(IndStreamPlayerConfigs.tr)}` : '';
-            const AwsIndStreamIframeUrl = `${AwsIndStreamDomain}/play/${imdbID}${AwsIndStreamIframeParamTr}`;
+    document.getElementById('playButton').addEventListener('click', function () {
+      const imdbID = document.getElementById('imdbInput').value.trim();
+      if (imdbID) {
+        const AwsIndStreamIframeUrl = `${AwsIndStreamDomain}/play/${imdbID}`;
+        loadIframe(AwsIndStreamIframeUrl);
+      } else {
+        alert('Please enter a valid IMDb ID.');
+      }
+    });
 
-            AwsIndStreamPlayerIframe.setAttribute('src', AwsIndStreamIframeUrl);
-            AwsIndStreamPlayerIframe.setAttribute('width', IndStreamPlayerConfigs.width);
-            AwsIndStreamPlayerIframe.setAttribute('height', IndStreamPlayerConfigs.height);
-            AwsIndStreamPlayerIframe.setAttribute('frameborder', '0');
-            AwsIndStreamPlayerIframe.setAttribute('allowfullscreen', 'true');
+    function loadIframe(url) {
+      const playerContainer = document.getElementById(IndStreamPlayerConfigs.id);
+      playerContainer.innerHTML = ''; // Clear previous iframe if any
 
-            const AwsIndStreamPlayerContainer = document.getElementById(IndStreamPlayerConfigs.id);
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('src', url);
+      iframe.setAttribute('width', IndStreamPlayerConfigs.width);
+      iframe.setAttribute('height', IndStreamPlayerConfigs.height);
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allowfullscreen', 'true');
 
-            if (AwsIndStreamPlayerContainer) {
-                if (!AwsIndStreamPlayerContainer.querySelector('iframe')) {
-                    AwsIndStreamPlayerContainer.appendChild(AwsIndStreamPlayerIframe);
-                }
-            } else {
-                setTimeout(() => genAwsPlayer(imdbID), 100);
-            }
-        };
+      playerContainer.appendChild(iframe);
+
+      // Feedback while loading the iframe
+      iframe.onload = function () {
+        console.log('Iframe loaded successfully.');
+      };
+
+      iframe.onerror = function () {
+        playerContainer.innerHTML = '<p style="color:white;">Error loading the stream. Please try again.</p>';
+      };
+    }
 
         const AwsIndStreamAjax = (url, success, error) => {
             const xhr = new XMLHttpRequest();
