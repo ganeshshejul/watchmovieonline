@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tr: false
     };
 
-    const AwsIndStreamDomain = 'https://akaino330lpx.com'; // Ensure this domain is correct
+    const AwsIndStreamDomain = 'https://vino332gptk.com'; // Ensure this domain is correct
     let initIndStreamPlayer = false;
 
     document.getElementById('playButton').addEventListener('click', function () {
