@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    let currentTab = 'all'; // Changed default to 'all'
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+            // Update current tab
+            currentTab = button.dataset.tab;
+            // Clear input field
+            document.getElementById('imdbInput').value = '';
+            // Update placeholder based on tab
+            let placeholderText = 'Enter IMDb ID';
+            if (currentTab === 'movies') placeholderText = 'Enter Movie IMDb ID';
+            if (currentTab === 'series') placeholderText = 'Enter Series IMDb ID';
+            if (currentTab === 'all') placeholderText = 'Enter IMDb ID';
+            document.getElementById('imdbInput').placeholder = placeholderText;
+        });
+    });
+
     const IndStreamPlayerConfigs = {
         width: 380,
         height: 280,
@@ -6,21 +28,35 @@ document.addEventListener('DOMContentLoaded', function () {
         tr: false
     };
 
-    const AwsIndStreamDomain = 'https://vino332gptk.com'; // Ensure this domain is correct
+    const VidSrcDomain = 'https://vidsrc.to';
+    const VinoStreamDomain = 'https://vino332gptk.com';
     let initIndStreamPlayer = false;
 
     document.getElementById('playButton').addEventListener('click', function () {
         const imdbID = document.getElementById('imdbInput').value.trim();
-        if (imdbID) {
-            const AwsIndStreamIframeUrl = `${AwsIndStreamDomain}/play/${imdbID}`;
-            
-            AwsIndStreamAjax(AwsIndStreamIframeUrl, () => {
-                loadIframe(AwsIndStreamIframeUrl);
+        if (!imdbID) {
+            alert('Please enter a valid IMDb ID.');
+            return;
+        }
+
+        let streamUrl;
+        if (currentTab === 'all') {
+            // For 'Movies & Series' tab, use Vino stream
+            streamUrl = `${VinoStreamDomain}/play/${imdbID}`;
+            // Use AJAX for Vino stream
+            VinoStreamAjax(streamUrl, () => {
+                loadIframe(streamUrl);
             }, () => {
                 alert('Wait 10-15 Seconds After Clicking On Play');
             });
-        } else {
-            alert('Please enter a valid IMDb ID.');
+        } else if (currentTab === 'movies') {
+            // Use VidSrc movies endpoint
+            streamUrl = `${VidSrcDomain}/embed/movie/${imdbID}`;
+            loadIframe(streamUrl);
+        } else if (currentTab === 'series') {
+            // Use VidSrc TV/series endpoint
+            streamUrl = `${VidSrcDomain}/embed/tv/${imdbID}`;
+            loadIframe(streamUrl);
         }
     });
 
@@ -47,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    function AwsIndStreamAjax(url, success, error) {
+    function VinoStreamAjax(url, success, error) {
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -62,11 +98,17 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send(null);
     }
 
+    if (window.addEventListener) {
+        window.addEventListener('message', listener);
+    } else {
+        window.attachEvent('onmessage', listener);
+    }
+
     function listener(event) {
-        if (event.origin === AwsIndStreamDomain && !initIndStreamPlayer) {
+        if (event.origin === VinoStreamDomain && !initIndStreamPlayer) {
             if (event.data && event.data.event) {
                 const playerContainer = document.getElementById(IndStreamPlayerConfigs.id);
-
+                
                 if (event.data.event === 'init') {
                     initIndStreamPlayer = true;
                 } else if (event.data.event === 'error' && playerContainer) {
@@ -74,11 +116,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-    }
-
-    if (window.addEventListener) {
-        window.addEventListener('message', listener);
-    } else {
-        window.attachEvent('onmessage', listener);
     }
 });
