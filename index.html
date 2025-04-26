@@ -1,24 +1,120 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>My Network</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Movies GS</title>
   <link rel="icon" href="img/favicon.ico">
   <link rel="stylesheet" href="css/normalize.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<center>
-  <div>
-    <h1 style="color:red;"><br>https://www.imdb.com/title/IMDB ID</h1>
-    <h1 style="color:#53a343;"><br>For Eg:https://www.imdb.com/title/tt1187043/</h1>
-    <h1 style="color:#dd9af6;"><br>IMDB ID:tt1187043</h1>
+  <div class="container">
+    <header class="site-header">
+      <div class="logo">
+        <i class="fas fa-film"></i>
+        <h1>Watch Movies <span class="gs-text">GS</span></h1>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="hero-section">
+        <h2 class="hero-title">Stream Your Favorite Movies</h2>
+        <p class="hero-subtitle">Enter an IMDb ID to start watching instantly</p>
+      </section>
+
+      <section class="steps-section">
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Find Your Movie</h3>
+              <p>Search for your movie on IMDb: <a href="https://www.imdb.com/title/tt1187043" class="imdb-link" target="_blank">https://www.imdb.com/title/IMDB_ID</a></p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Copy the IMDb ID</h3>
+              <p>For example: <span class="highlight">tt1187043</span> from the URL</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Paste & Play</h3>
+              <p>Enter the ID below and click Play</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="player-section">
+        <div class="input-wrapper">
+          <div class="tabs-container">
+            <button class="tab-button active" data-tab="all">Movies & Series</button>
+            <button class="tab-button" data-tab="movies">Movies</button>
+            <button class="tab-button" data-tab="series">Series</button>
+          </div>
+          <input type="text" id="imdbInput" placeholder="Enter Movie IMDb ID">
+          <button id="playButton"><i class="fas fa-play"></i> Play</button>
+        </div>
+
+        <div class="player-container">
+          <div id="IndStreamPlayer" class="responsive-player"></div>
+          <div class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Loading movie, please wait...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2024 Watch Movies GS. All rights reserved.</p>
+      <p class="disclaimer">This site is for educational purposes only.</p>
+    </footer>
   </div>
-  <div class="wrapper">
-      <input type="text" id="imdbInput" placeholder="Enter IMDb ID">
-      <button id="playButton">Play</button>
-    </div>
-    <div id="IndStreamPlayer"></div>
+
   <script src="js/main.js"></script>
+  <script>
+    // Show/hide loading indicator
+    document.getElementById('playButton').addEventListener('click', function() {
+      const loadingIndicator = document.querySelector('.loading-indicator');
+      loadingIndicator.classList.add('show');
+
+      // Hide loading indicator after 15 seconds or when iframe loads
+      setTimeout(function() {
+        loadingIndicator.classList.remove('show');
+      }, 15000);
+    });
+
+    // Make iframe responsive after it's loaded
+    const playerContainer = document.getElementById('IndStreamPlayer');
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          const iframe = playerContainer.querySelector('iframe');
+          if (iframe) {
+            // Make iframe responsive
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+
+            // Hide loading indicator when iframe is loaded
+            iframe.onload = function() {
+              document.querySelector('.loading-indicator').classList.remove('show');
+            };
+          }
+        }
+      });
+    });
+
+    observer.observe(playerContainer, { childList: true });
+  </script>
 </body>
 </html>
