@@ -13,7 +13,7 @@ So, grab your snacks, sit back, and enjoy unlimited movie streaming for free! ðŸ
 
 # Website Demo:
   https://watchmoviegs.netlify.app <br>
-  https://github.com/ganeshshejul/watchmovieonline
+  https:/ganeshshejul.github.io/watchmovieonline
 
 # Steps To Watch The Movies
 
