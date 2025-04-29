@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const VidSrcDomain = 'https://vidsrc.to';
-    const VinoStreamDomain = 'https://vino332gptk.com';
+    const VinoStreamDomain = 'https://vitea349ina.com';
     let initIndStreamPlayer = false;
 
     document.getElementById('playButton').addEventListener('click', function () {
