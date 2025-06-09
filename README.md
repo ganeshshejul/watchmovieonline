@@ -1,7 +1,7 @@
-# Watch Movie Online
-🎬 **Watch Movies Online for FREE!** 🍿
+# Watch Movie/Series Online
+🎬 **Watch Movies/Series Online for FREE!** 🍿
 
-✨ Discover a treasure trove of movies right at your fingertips, all without spending a dime! Whether you're into action-packed blockbusters, heartwarming romances, or edge-of-your-seat thrillers, we've got it all. Stream your favorite films in HD quality from the comfort of your home. No subscriptions, no hidden fees—just pure entertainment! 🎉
+✨ Discover a treasure trove of movies/series right at your fingertips, all without spending a dime! Whether you're into action-packed blockbusters, heartwarming romances, or edge-of-your-seat thrillers, we've got it all. Stream your favorite films in HD quality from the comfort of your home. No subscriptions, no hidden fees—just pure entertainment! 🎉
 
 🚀 **Key Features:**
 - 📺 **Wide Collection:** From classics to the latest releases, there's something for everyone!
@@ -15,14 +15,14 @@ So, grab your snacks, sit back, and enjoy unlimited movie streaming for free! �
   https://watchmoviegs.netlify.app <br>
   https://ganeshshejul.github.io/watchmovieonline
 
-# Steps To Watch The Movies
+# Steps To Watch The Movies/Series
 
-**Step 1:** First Search The Movie Name In Format "Movie Name IMDB".
+**Step 1:** First Search The Movie Name In Format "Movie/Series Name IMDB".
 
 <img width="1280" alt="Screenshot 2024-08-26 at 6 41 13 PM" src="https://github.com/user-attachments/assets/2b717fb8-1474-47b7-98e1-ddca3d609251"><br>
 
 
-**Step 2:** Open The IMDB Link Of Searched Movie.
+**Step 2:** Open The IMDB Link Of Searched Movie/Series.
 
 
 <img width="1280" alt="Screenshot 2024-08-26 at 6 41 27 PM" src="https://github.com/user-attachments/assets/e36a7038-bf9b-4596-8759-1a8a7f82d8dc"><br>
@@ -53,7 +53,7 @@ So, grab your snacks, sit back, and enjoy unlimited movie streaming for free! �
 <img width="1280" alt="Screenshot 2025-04-26 at 11 28 49 PM" src="https://github.com/user-attachments/assets/1a516bb0-78cf-4c83-adda-404268f266bb" /><br>
 
 
-**Now You Can Enjoy The Movie By Clicking On Play Button And Enlarge It To Full Screen.**
+**Now You Can Enjoy The Movie/Series By Clicking On Play Button And Enlarge It To Full Screen.**
 
 
 
